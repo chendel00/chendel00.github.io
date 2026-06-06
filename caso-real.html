@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caso real — Cristian Hendel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<style>
+  body {
+    font-family: 'Archivo', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    text-rendering: optimizeLegibility;
+  }
+  .mono { font-family: 'Space Mono', monospace; }
+</style>
+</head>
+<body>
+<div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
+
+  <!-- HEADER w/ back link -->
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-10 md:py-12 gap-6">
+    <a href="./index.html" class="mono text-xs md:text-sm uppercase font-black tracking-widest hover:text-[#0FFF50] transition-colors">← Volver al inicio</a>
+    <span class="bg-black text-white px-6 py-3 mono text-sm md:text-base uppercase font-bold tracking-widest whitespace-nowrap">Caso real</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-24">
+    <div class="max-w-7xl mx-auto">
+      <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Auditoría #001</span>
+      <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] uppercase tracking-tighter mb-8 max-w-5xl">
+        Account takeover<br>sin <span class="text-[#0FFF50] bg-black px-2">credenciales</span>.
+      </h1>
+      <p class="text-xl md:text-2xl max-w-3xl font-bold leading-tight mb-6">
+        Plataforma SaaS multi-tenant del sector logística internacional. Ocho empresas afectadas en cuatro países. Dos críticos, tres altos, un medio.
+      </p>
+      <p class="mono text-xs uppercase tracking-widest text-gray-500">
+        Datos anonimizados · Cliente y plataforma bajo NDA · Reportado bajo divulgación responsable
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTEXT GRID -->
+  <section class="border-b-2 border-black bg-black text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4">
+      <div class="p-6 md:p-10 border-r-2 border-b-2 md:border-b-0 border-white">
+        <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Sector</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">Logística<br>internacional</div>
+      </div>
+      <div class="p-6 md:p-10 md:border-r-2 border-b-2 md:border-b-0 border-white">
+        <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Arquitectura</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">SaaS<br>multi-tenant</div>
+      </div>
+      <div class="p-6 md:p-10 border-r-2 border-white">
+        <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Alcance</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">8 empresas<br>4 países</div>
+      </div>
+      <div class="p-6 md:p-10">
+        <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Operación</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">Sector<br>regulado</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-24">
+    <div class="max-w-5xl mx-auto">
+      <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Timeline</span>
+      <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-12">
+        Cómo se desplegó la auditoría.
+      </h2>
+
+      <div class="space-y-0 border-l-4 border-black pl-6 md:pl-10">
+
+        <div class="relative pb-10">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#0FFF50] border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-gray-500 mb-2">Día 0 · Reconocimiento pasivo</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Subdominios expuestos vía CT logs</h3>
+          <p class="text-base md:text-lg leading-snug">Certificate Transparency (crt.sh) reveló un panel administrativo en un subdominio no indexado. Sin tocar la infraestructura del cliente — solo información pública.</p>
+        </div>
+
+        <div class="relative pb-10">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#0FFF50] border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-gray-500 mb-2">Día 1 · Análisis de bundles JS</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Endpoints de API documentados en el frontend</h3>
+          <p class="text-base md:text-lg leading-snug">El bundle JavaScript público contenía referencias a rutas de la API que no estaban documentadas. Mapeo de la superficie de ataque desde el cliente, sin interacción con el backend.</p>
+        </div>
+
+        <div class="relative pb-10">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#DC2626] border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-[#DC2626] mb-2">Día 3 · Hallazgo crítico #1 · CVSS 9.8</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">IDOR sin autenticación → account takeover</h3>
+          <p class="text-base md:text-lg leading-snug mb-3">Un endpoint aceptaba modificación de cuenta con solo un identificador numérico predecible. Sin token, sin sesión, sin verificación. Reseteo de credenciales de cualquier cuenta — incluidas las administrativas — desde un navegador en modo incógnito.</p>
+          <div class="bg-black text-[#0FFF50] mono text-xs p-4 leading-relaxed overflow-x-auto">
+            POST /api/v1/account/[id]/reset<br>
+            Authorization: <span class="text-[#DC2626]">[ausente]</span><br>
+            <br>
+            { "email": "atacante@evil.com" }<br>
+            → 200 OK
+          </div>
+        </div>
+
+        <div class="relative pb-10">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#DC2626] border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-[#DC2626] mb-2">Día 5 · Hallazgo crítico #2 · CVSS 9.1</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">SQL injection error-based + boolean-blind</h3>
+          <p class="text-base md:text-lg leading-snug">Parámetro de búsqueda sin sanitización. Extracción carácter a carácter de la base usando majority-vote sobre el tamaño de respuesta HTTP. Acceso a la estructura completa del schema: usuarios, hashes, datos fiscales (CUIT), operaciones financieras.</p>
+        </div>
+
+        <div class="relative pb-10">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-black border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-gray-500 mb-2">Día 7 · Hallazgos altos</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Contraseñas en texto plano · enumeración de CUIT</h3>
+          <p class="text-base md:text-lg leading-snug">El schema confirmó almacenamiento de contraseñas sin hash. Adicionalmente: oracle de respuesta HTTP permitía enumerar CUIT/DNI válidos del padrón de la plataforma sin autenticación.</p>
+        </div>
+
+        <div class="relative">
+          <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#0FFF50] border-2 border-black"></div>
+          <div class="mono text-xs uppercase tracking-widest text-gray-500 mb-2">Día 10 · Reporte entregado</div>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Informe ejecutivo + técnico con remediación</h3>
+          <p class="text-base md:text-lg leading-snug">Reporte de 40 páginas con CVSS scoring, vectores reproducibles, impacto cuantificado y plan de remediación priorizado. Reunión de presentación con el equipo técnico bajo NDA.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-24 bg-[#0FFF50] text-black">
+    <div class="max-w-5xl mx-auto">
+      <span class="mono text-sm uppercase bg-black text-[#0FFF50] px-2 py-1 mb-8 inline-block">Impacto potencial</span>
+      <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-12">
+        Qué hubiera pasado<br>si lo encontraban otros.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="border-2 border-black p-6 md:p-8 bg-white">
+          <iconify-icon icon="lucide:database" class="text-3xl mb-4"></iconify-icon>
+          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Exposición de bases completas</h3>
+          <p class="text-sm leading-snug">Datos fiscales (CUIT), credenciales, operaciones financieras de las ocho empresas tenant en cuatro jurisdicciones.</p>
+        </div>
+        <div class="border-2 border-black p-6 md:p-8 bg-white">
+          <iconify-icon icon="lucide:user-x" class="text-3xl mb-4"></iconify-icon>
+          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Account takeover masivo</h3>
+          <p class="text-sm leading-snug">Cualquier cuenta administrativa comprometible desde un navegador. Sin necesidad de phishing, sin necesidad de ingeniería social.</p>
+        </div>
+        <div class="border-2 border-black p-6 md:p-8 bg-white">
+          <iconify-icon icon="lucide:scale" class="text-3xl mb-4"></iconify-icon>
+          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Obligación de notificación</h3>
+          <p class="text-sm leading-snug">Ley 25.326 (Argentina) y normativas equivalentes en las tres jurisdicciones restantes. Multas regulatorias acumulativas.</p>
+        </div>
+        <div class="border-2 border-black p-6 md:p-8 bg-white">
+          <iconify-icon icon="lucide:trending-down" class="text-3xl mb-4"></iconify-icon>
+          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Parálisis operativa</h3>
+          <p class="text-sm leading-snug">Sector regulado. Una brecha pública obligaría a suspender operaciones hasta auditoría completa de control interno.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETHICS NOTE -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-24 bg-black text-white">
+    <div class="max-w-3xl mx-auto">
+      <span class="mono text-sm uppercase bg-[#0FFF50] text-black px-2 py-1 mb-8 inline-block">Cómo se manejó</span>
+      <h2 class="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-8">
+        Ningún dato real fue extraído.
+      </h2>
+      <div class="space-y-4 text-base md:text-lg leading-snug text-gray-300">
+        <p>
+          Toda la investigación se hizo con <strong class="text-white">PoC mínima</strong>: confirmar la existencia del vector sin acceder a datos de usuarios reales. La SQLi se validó extrayendo metadata del schema (<span class="mono text-sm">SELECT VERSION(), DATABASE()</span>) — nunca contenido de tablas con información personal.
+        </p>
+        <p>
+          El reporte se entregó <strong class="text-white">bajo ISO/IEC 29147</strong> (responsible disclosure). Plazo de 90 días para remediación antes de cualquier publicación. Reunión con el equipo técnico bajo NDA. Cliente y plataforma no se identifican en este caso público.
+        </p>
+        <p>
+          Si encontrás algo así en tu plataforma, <strong class="text-white">esto es lo que vas a recibir</strong>: un proceso documentado, ético, y enfocado en resolver — no en presionar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="p-6 md:p-12 md:py-32 bg-white flex flex-col items-center">
+    <div class="max-w-2xl w-full text-center">
+      <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6 leading-none">
+        ¿Tu plataforma<br>tiene algo así?
+      </h2>
+      <p class="text-lg md:text-xl mb-10 leading-snug">
+        Probablemente sí. La mayoría de los SaaS multi-tenant tiene al menos un IDOR. Mejor encontrarlo conmigo que con alguien que no firme NDA.
+      </p>
+      <a href="./index.html#contacto" class="inline-block bg-black text-white font-black uppercase py-5 px-10 text-lg md:text-xl hover:bg-[#0FFF50] hover:text-black border-2 border-black transition-colors">
+        Pedí tu cotización →
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
+    <div class="mb-8 md:mb-0">
+      <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
+      <div class="mono text-xs mt-2">Security Consultant © 2026</div>
+    </div>
+    <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
+      <a href="./index.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Inicio →</a>
+      <a href="https://www.linkedin.com/in/hendel96/" target="_blank" rel="noopener" class="hover:text-[#0FFF50] hover:line-through transition-colors">LinkedIn →</a>
+      <a href="https://github.com/chendel00" target="_blank" rel="noopener" class="hover:text-[#0FFF50] hover:line-through transition-colors">GitHub →</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
