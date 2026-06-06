@@ -469,20 +469,20 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <label class="mono text-xs uppercase font-bold block">Nombre</label>
-            <input type="text" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
           </div>
           <div class="space-y-2">
             <label class="mono text-xs uppercase font-bold block">Empresa</label>
-            <input type="text" placeholder="Tu SaaS / Startup" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <input type="text" name="empresa" placeholder="Tu SaaS / Startup" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
           </div>
         </div>
         <div class="space-y-2">
           <label class="mono text-xs uppercase font-bold block">Email</label>
-          <input type="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+          <input type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
         </div>
         <div class="space-y-2">
           <label class="mono text-xs uppercase font-bold block">Mensaje</label>
-          <textarea rows="4" placeholder="Contame sobre tu plataforma..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
+          <textarea rows="4" name="mensaje" placeholder="Contame sobre tu plataforma..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
         </div>
         <button type="submit" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-white hover:text-black border-2 border-black transition-all duration-300 rounded-[2px]">Enviar</button>
       </form>
