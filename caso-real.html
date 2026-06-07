@@ -37,7 +37,7 @@
         Account takeover<br>sin <span class="text-[#0FFF50] bg-black px-2">credenciales</span>.
       </h1>
       <p class="text-xl md:text-2xl max-w-3xl font-bold leading-tight mb-6">
-        Plataforma SaaS multi-tenant del sector logística internacional. Ocho empresas afectadas en cuatro países. Dos críticos, tres altos, un medio.
+        Plataforma SaaS B2B multi-tenant. Encadenamiento de vulnerabilidades que permitía acceso administrativo sin autenticación. Dos críticos, tres altos, un medio.
       </p>
       <p class="mono text-xs uppercase tracking-widest text-gray-500">
         Datos anonimizados · Cliente y plataforma bajo NDA · Reportado bajo divulgación responsable
@@ -50,7 +50,7 @@
     <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4">
       <div class="p-6 md:p-10 border-r-2 border-b-2 md:border-b-0 border-white">
         <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Sector</div>
-        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">Logística<br>internacional</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">E-commerce<br>B2B</div>
       </div>
       <div class="p-6 md:p-10 md:border-r-2 border-b-2 md:border-b-0 border-white">
         <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Arquitectura</div>
@@ -58,11 +58,11 @@
       </div>
       <div class="p-6 md:p-10 border-r-2 border-white">
         <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Alcance</div>
-        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">8 empresas<br>4 países</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">12 marcas<br>tenant</div>
       </div>
       <div class="p-6 md:p-10">
         <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">Operación</div>
-        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">Sector<br>regulado</div>
+        <div class="text-xl md:text-2xl font-black uppercase tracking-tighter leading-tight">Procesamiento<br>B2B</div>
       </div>
     </div>
   </section>
@@ -110,14 +110,14 @@
           <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-[#DC2626] border-2 border-black"></div>
           <div class="mono text-xs uppercase tracking-widest text-[#DC2626] mb-2">Día 5 · Hallazgo crítico #2 · CVSS 9.1</div>
           <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">SQL injection error-based + boolean-blind</h3>
-          <p class="text-base md:text-lg leading-snug">Parámetro de búsqueda sin sanitización. Extracción carácter a carácter de la base usando majority-vote sobre el tamaño de respuesta HTTP. Acceso a la estructura completa del schema: usuarios, hashes, datos fiscales (CUIT), operaciones financieras.</p>
+          <p class="text-base md:text-lg leading-snug">Parámetro de búsqueda sin sanitización. Extracción carácter a carácter de la base usando majority-vote sobre el tamaño de respuesta HTTP. Acceso a la estructura completa del schema: usuarios, hashes, datos de clientes, pedidos y métodos de pago.</p>
         </div>
 
         <div class="relative pb-10">
           <div class="absolute -left-[34px] md:-left-[44px] w-4 h-4 bg-black border-2 border-black"></div>
           <div class="mono text-xs uppercase tracking-widest text-gray-500 mb-2">Día 7 · Hallazgos altos</div>
-          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Contraseñas en texto plano · enumeración de CUIT</h3>
-          <p class="text-base md:text-lg leading-snug">El schema confirmó almacenamiento de contraseñas sin hash. Adicionalmente: oracle de respuesta HTTP permitía enumerar CUIT/DNI válidos del padrón de la plataforma sin autenticación.</p>
+          <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">Contraseñas en texto plano · enumeración de usuarios</h3>
+          <p class="text-base md:text-lg leading-snug">El schema confirmó almacenamiento de contraseñas sin hash. Adicionalmente: oracle de respuesta HTTP permitía enumerar emails y datos de clientes válidos del padrón de la plataforma sin autenticación.</p>
         </div>
 
         <div class="relative">
@@ -143,7 +143,7 @@
         <div class="border-2 border-black p-6 md:p-8 bg-white">
           <iconify-icon icon="lucide:database" class="text-3xl mb-4"></iconify-icon>
           <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Exposición de bases completas</h3>
-          <p class="text-sm leading-snug">Datos fiscales (CUIT), credenciales, operaciones financieras de las ocho empresas tenant en cuatro jurisdicciones.</p>
+          <p class="text-sm leading-snug">Credenciales, datos de clientes, historial de pedidos y métodos de pago de las 12 marcas tenant.</p>
         </div>
         <div class="border-2 border-black p-6 md:p-8 bg-white">
           <iconify-icon icon="lucide:user-x" class="text-3xl mb-4"></iconify-icon>
@@ -153,12 +153,12 @@
         <div class="border-2 border-black p-6 md:p-8 bg-white">
           <iconify-icon icon="lucide:scale" class="text-3xl mb-4"></iconify-icon>
           <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Obligación de notificación</h3>
-          <p class="text-sm leading-snug">Ley 25.326 (Argentina) y normativas equivalentes en las tres jurisdicciones restantes. Multas regulatorias acumulativas.</p>
+          <p class="text-sm leading-snug">Ley 25.326 (Argentina) y normativas similares de protección de datos en los mercados donde opera la plataforma. Multas regulatorias acumulativas.</p>
         </div>
         <div class="border-2 border-black p-6 md:p-8 bg-white">
           <iconify-icon icon="lucide:trending-down" class="text-3xl mb-4"></iconify-icon>
-          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Parálisis operativa</h3>
-          <p class="text-sm leading-snug">Sector regulado. Una brecha pública obligaría a suspender operaciones hasta auditoría completa de control interno.</p>
+          <h3 class="text-xl md:text-2xl font-black uppercase tracking-tighter mb-3 leading-none">Fuga reputacional</h3>
+          <p class="text-sm leading-snug">Filtración pública del incidente afectaría la confianza simultánea de las 12 marcas tenant. Daño en cascada difícil de contener una vez publicado.</p>
         </div>
       </div>
     </div>
