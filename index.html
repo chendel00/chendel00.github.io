@@ -622,7 +622,29 @@
       <div class="corner-marker top-right"></div>
       <div class="corner-marker bottom-left"></div>
       <div class="corner-marker bottom-right"></div>
-      <form action="https://formsubmit.co/cristian@hendelsec.com" method="POST" class="space-y-6">
+
+      <!-- Success state (hidden by default) -->
+      <div id="formSuccess" class="hidden text-center py-12">
+        <div class="inline-block bg-[#0FFF50] text-black px-3 py-1 mono text-xs uppercase tracking-widest mb-6">Mensaje recibido</div>
+        <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6">
+          Listo. Te respondo<br>en breve.
+        </h3>
+        <p class="text-base md:text-lg leading-snug max-w-md mx-auto mb-8">
+          Te llega un mail desde <strong>cristian@hendelsec.com</strong> con los próximos pasos. Si es urgente, escribime por WhatsApp.
+        </p>
+        <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escrib%C3%AD%20por%20el%20formulario%20de%20la%20web%20pero%20es%20urgente." target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-black text-[#0FFF50] mono text-sm uppercase font-bold tracking-widest px-6 py-3 hover:bg-[#0FFF50] hover:text-black transition-colors border-2 border-black">
+          <iconify-icon icon="ri:whatsapp-fill"></iconify-icon>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <!-- Error state (hidden by default) -->
+      <div id="formError" class="hidden text-center py-8 border-2 border-[#DC2626] bg-red-50 p-6 mb-6">
+        <p class="text-base font-bold mb-2">Algo salió mal.</p>
+        <p class="text-sm mb-4">No pudimos enviar tu mensaje. Probá de nuevo o escribime por WhatsApp.</p>
+      </div>
+
+      <form id="contactForm" action="https://formsubmit.co/cristian@hendelsec.com" method="POST" class="space-y-6">
         <input type="hidden" name="_subject" value="Nuevo contacto desde hendelsec.com">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
@@ -645,7 +667,10 @@
           <label class="mono text-xs uppercase font-bold block">Mensaje</label>
           <textarea rows="4" name="mensaje" placeholder="Contame sobre tu plataforma..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
         </div>
-        <button type="submit" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-white hover:text-black border-2 border-black transition-all duration-300 rounded-[2px]">Enviar</button>
+        <button type="submit" id="submitBtn" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-white hover:text-black border-2 border-black transition-all duration-300 rounded-[2px] disabled:opacity-60 disabled:cursor-not-allowed">
+          <span class="btn-text">Enviar</span>
+          <span class="btn-loading hidden">Enviando...</span>
+        </button>
       </form>
       <p class="mt-8 text-center text-xs mono text-gray-500">Todo hallazgo bajo acuerdo de confidencialidad.</p>
     </div>
@@ -739,6 +764,57 @@
   if (backToTop) {
     backToTop.addEventListener('click', function() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ===== Form AJAX submission =====
+  var form = document.getElementById('contactForm');
+  var formSuccess = document.getElementById('formSuccess');
+  var formError = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Hide previous error if any
+      if (formError) formError.classList.add('hidden');
+
+      // Toggle loading state
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.btn-text').classList.add('hidden');
+      submitBtn.querySelector('.btn-loading').classList.remove('hidden');
+
+      var formData = new FormData(form);
+
+      // FormSubmit AJAX endpoint
+      var ajaxAction = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+      fetch(ajaxAction, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (!response.ok) throw new Error('Network error');
+        return response.json();
+      })
+      .then(function(data) {
+        // Success: hide form, show success state
+        form.classList.add('hidden');
+        if (formSuccess) {
+          formSuccess.classList.remove('hidden');
+          // Scroll the success message into view smoothly
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      })
+      .catch(function(err) {
+        // Error: restore button, show error
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-text').classList.remove('hidden');
+        submitBtn.querySelector('.btn-loading').classList.add('hidden');
+        if (formError) formError.classList.remove('hidden');
+      });
     });
   }
 
