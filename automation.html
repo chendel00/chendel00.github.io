@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristian Hendel — Automatización</title>
+<meta name="description" content="Automatización de procesos operativos para empresas. Python, integración con IA, pipelines de datos. Convierto trabajo manual en sistemas que corren solos.">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cristian Hendel — Automatización de procesos">
+<meta property="og:description" content="Convierto procesos manuales en código. Python, IA, pipelines de datos.">
+<meta property="og:url" content="https://hendelsec.com/automation">
+<meta property="og:locale" content="es_AR">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cristian Hendel — Automatización">
+<meta name="twitter:description" content="Convierto procesos manuales en código.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<style>
+  :root {
+    --yellow: #f8e602;
+    --cyan: #00f0ff;
+  }
+  body {
+    font-family: 'Archivo', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    text-rendering: optimizeLegibility;
+  }
+  .mono { font-family: 'Space Mono', monospace; }
+
+  /* Badge (hero) */
+  .hash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #000;
+    color: #fff;
+    padding: 8px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+  }
+  .hash-badge .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+  /* Scanline (top of hero) - yellow */
+  @keyframes flicker {
+    0%,44%,56%,100% { opacity: 1; }
+    45%,55% { opacity: 0; }
+  }
+  .scanline { animation: flicker 3s linear infinite; }
+
+  /* Photo frame */
+  .corner-marker { position: absolute; width: 16px; height: 16px; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #fff; }
+  ::-webkit-scrollbar-thumb { background: #000; border: 2px solid #fff; }
+
+  html { scroll-behavior: smooth; }
+
+  /* Scroll progress bar - yellow */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: #f8e602; width: 0%; z-index: 100;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 8px rgba(248, 230, 2, 0.5);
+  }
+
+  /* Back to top - cyan shadow */
+  .back-to-top {
+    position: fixed; bottom: 24px; left: 24px;
+    width: 48px; height: 48px; background: #000; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 4px 4px 0 #00f0ff; z-index: 40;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.15s;
+    border: 2px solid #000;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #00f0ff; }
+
+  /* Sticky mobile CTA - cyan accent */
+  .sticky-cta-mobile {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #000; color: #fff; padding: 14px 16px; z-index: 30;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-top: 2px solid #00f0ff;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .sticky-cta-mobile.visible { transform: translateY(0); }
+  .sticky-cta-mobile .arrow { color: #00f0ff; }
+  body.sticky-visible .floating-whatsapp { bottom: 76px; }
+
+  @media (min-width: 768px) {
+    .sticky-cta-mobile { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
+
+  <!-- HEADER -->
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-10 md:py-12 gap-6">
+    <nav class="flex items-center gap-6 mono text-sm md:text-base uppercase font-black tracking-tighter">
+      <a href="./index.html" class="hover:text-[#00f0ff] transition-colors">Seguridad</a>
+      <span class="bg-[#f8e602] text-black px-3 py-1">Automatización</span>
+    </nav>
+    <span class="bg-black text-white px-6 py-3 mono text-sm md:text-base uppercase font-bold tracking-widest whitespace-nowrap">Buenos Aires, AR</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 overflow-hidden relative">
+    <div class="scanline absolute top-0 left-0 right-0 h-[3px] bg-[#f8e602]"></div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+
+      <div class="md:col-span-7">
+        <h1 class="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.9] uppercase tracking-tighter mb-8">
+          Tus procesos<br>manuales son<br>un <span class="bg-[#f8e602] text-black px-2">bug</span>.
+        </h1>
+        <div class="hash-badge mb-8">
+          <span class="dot pulse-dot"></span>
+          <span>disponible · BA</span>
+        </div>
+        <p class="text-xl md:text-3xl max-w-2xl font-bold leading-tight">
+          Identifico flujos operativos que no escalan y los convierto en código.
+        </p>
+      </div>
+
+      <div class="md:col-span-5 flex justify-center md:justify-end">
+        <div class="relative max-w-sm w-full">
+          <div class="absolute inset-0 bg-[#00f0ff] translate-x-2 translate-y-2"></div>
+          <div class="relative border-2 border-black bg-gray-200 aspect-[4/5] overflow-hidden">
+            <img src="./cris.jpg" alt="Cristian Hendel" class="w-full h-full object-cover grayscale contrast-110">
+          </div>
+          <div class="corner-marker absolute -top-1 -left-1 border-t-2 border-l-2 border-[#00f0ff]" style="width:12px;height:12px;"></div>
+          <div class="corner-marker absolute -top-1 -right-1 border-t-2 border-r-2 border-[#00f0ff]" style="width:12px;height:12px;"></div>
+          <div class="corner-marker absolute -bottom-1 -left-1 border-b-2 border-l-2 border-[#00f0ff]" style="width:12px;height:12px;"></div>
+          <div class="corner-marker absolute -bottom-1 -right-1 border-b-2 border-r-2 border-[#00f0ff]" style="width:12px;height:12px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- USE CASES (4 quadrants) -->
+  <section class="grid grid-cols-1 md:grid-cols-2 border-b-2 border-black">
+
+    <article class="p-6 md:p-12 border-b-2 md:border-b-0 md:border-r-2 border-black flex flex-col justify-between min-h-[360px]">
+      <div>
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Excel / Sheets</span>
+        <div class="w-12 h-[2px] bg-[#f8e602] mb-4"></div>
+        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none">Lo que hacés en dos horas, en cinco minutos</h2>
+        <p class="text-lg leading-snug mb-8">Planillas que se actualizan, validan y cruzan solas. Lo manual y repetitivo deja de comerte el día.</p>
+      </div>
+      <div class="bg-white border border-black p-5 mono text-xs uppercase font-bold flex flex-wrap gap-2">
+        <span class="border-l-2 border-[#f8e602] px-3 py-1">pandas</span>
+        <span class="border-l-2 border-[#f8e602] px-3 py-1">openpyxl</span>
+      </div>
+    </article>
+
+    <article class="p-6 md:p-12 border-b-2 md:border-b-0 border-black flex flex-col justify-between min-h-[360px]">
+      <div>
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Conciliación</span>
+        <div class="w-12 h-[2px] bg-[#00f0ff] mb-4"></div>
+        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none">Matching automático de miles de registros</h2>
+        <p class="text-lg leading-snug mb-8">Conciliación bancaria, cruces de datos, detección de discrepancias. Lo que un equipo tarda días, en una corrida.</p>
+      </div>
+      <div class="bg-white border border-black p-5 mono text-xs uppercase font-bold flex flex-wrap gap-2">
+        <span class="border-l-2 border-[#00f0ff] px-3 py-1">Python</span>
+        <span class="border-l-2 border-[#00f0ff] px-3 py-1">reconciliation</span>
+      </div>
+    </article>
+
+    <article class="p-6 md:p-12 border-b-2 md:border-b-0 md:border-r-2 border-black flex flex-col justify-between min-h-[360px]">
+      <div>
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">IA aplicada</span>
+        <div class="w-12 h-[2px] bg-[#00f0ff] mb-4"></div>
+        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none">Documentos no estructurados en datos usables</h2>
+        <p class="text-lg leading-snug mb-8">PDFs, mails, contratos, facturas: extracción inteligente con LLMs. La data que estaba enterrada, ahora consultable.</p>
+      </div>
+      <div class="bg-white border border-black p-5 mono text-xs uppercase font-bold flex flex-wrap gap-2">
+        <span class="border-l-2 border-[#00f0ff] px-3 py-1">LLM APIs</span>
+        <span class="border-l-2 border-[#00f0ff] px-3 py-1">OCR</span>
+        <span class="border-l-2 border-[#00f0ff] px-3 py-1">embeddings</span>
+      </div>
+    </article>
+
+    <article class="p-6 md:p-12 flex flex-col justify-between min-h-[360px]">
+      <div>
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Integraciones</span>
+        <div class="w-12 h-[2px] bg-[#f8e602] mb-4"></div>
+        <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-6 leading-none">Que tus sistemas se hablen entre sí</h2>
+        <p class="text-lg leading-snug mb-8">APIs, webhooks, automatizaciones entre tus herramientas. Data que fluye sin que nadie la copie y pegue.</p>
+      </div>
+      <div class="bg-white border border-black p-5 mono text-xs uppercase font-bold flex flex-wrap gap-2">
+        <span class="border-l-2 border-[#f8e602] px-3 py-1">REST</span>
+        <span class="border-l-2 border-[#f8e602] px-3 py-1">webhooks</span>
+        <span class="border-l-2 border-[#f8e602] px-3 py-1">Alteryx</span>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- PERFIL -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+
+      <div class="md:col-span-5">
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Perfil</span>
+        <div class="w-12 h-[2px] bg-[#00f0ff] mb-4"></div>
+        <h2 class="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
+          Entiendo el<br>negocio, no<br>solo el <span class="bg-[#f8e602] text-black px-2">código</span>.
+        </h2>
+      </div>
+
+      <div class="md:col-span-7 flex flex-col justify-between">
+        <div class="space-y-6 text-lg md:text-xl leading-snug">
+          <p>
+            Vengo de <strong>operations en banca de inversión</strong>. No automatizo desde afuera mirando un diagrama: viví el proceso manual, lo sufrí, y por eso sé exactamente dónde está el cuello de botella real.
+          </p>
+          <p>
+            En mi rol actual <strong>automaticé 1.650 horas anuales</strong> de trabajo manual con Python, SQL y Alteryx. No es teoría: es producción, con datos sensibles, en una de las instituciones financieras más grandes del mundo.
+          </p>
+          <p>
+            Cuando automatizo un proceso, <strong>entiendo qué pasa si sale mal en el negocio</strong>, no solo si tira un error el script. Esa diferencia es lo que separa una automatización que aguanta de una que rompe en el primer caso borde.
+          </p>
+        </div>
+
+        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 border-2 border-black">
+          <div class="p-4 md:p-6 border-r-2 border-black">
+            <div class="mono text-[10px] uppercase text-gray-500 mb-2">Automatizado</div>
+            <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">1.650h</div>
+            <div class="mono text-[10px] uppercase mt-1">/ año</div>
+          </div>
+          <div class="p-4 md:p-6 border-r-0 md:border-r-2 border-black">
+            <div class="mono text-[10px] uppercase text-gray-500 mb-2">Stack</div>
+            <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">Python</div>
+            <div class="mono text-[10px] uppercase mt-1">/ SQL · Alteryx</div>
+          </div>
+          <div class="p-4 md:p-6 border-t-2 md:border-t-0 border-r-2 border-black">
+            <div class="mono text-[10px] uppercase text-gray-500 mb-2">Dominio</div>
+            <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">Banca</div>
+            <div class="mono text-[10px] uppercase mt-1">/ inversión</div>
+          </div>
+          <div class="p-4 md:p-6 border-t-2 md:border-t-0 border-black">
+            <div class="mono text-[10px] uppercase text-gray-500 mb-2">Formación</div>
+            <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">M. Fin.</div>
+            <div class="mono text-[10px] uppercase mt-1">/ UCEMA</div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white border border-black p-5 mono text-xs uppercase font-bold flex flex-wrap gap-2">
+          <span class="border-l-2 border-[#f8e602] px-3 py-1">Python</span>
+          <span class="border-l-2 border-[#00f0ff] px-3 py-1">pandas</span>
+          <span class="border-l-2 border-[#f8e602] px-3 py-1">SQL</span>
+          <span class="border-l-2 border-[#00f0ff] px-3 py-1">Alteryx</span>
+          <span class="border-l-2 border-[#f8e602] px-3 py-1">LLM APIs</span>
+          <span class="border-l-2 border-[#00f0ff] px-3 py-1">REST / webhooks</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-16">
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Proceso</span>
+        <div class="w-12 h-[2px] bg-[#f8e602] mb-4"></div>
+        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">Cómo<br>trabajamos.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 border-2 border-black">
+        <div class="p-5 md:p-6 border-b-2 md:border-b-0 md:border-r-2 border-black">
+          <div class="mono text-[10px] uppercase tracking-widest text-gray-500 mb-3">01</div>
+          <div class="w-8 h-[2px] bg-[#00f0ff] mb-4"></div>
+          <h3 class="text-lg md:text-xl font-black uppercase tracking-tighter leading-none mb-3">Mapeo del proceso</h3>
+          <p class="text-xs leading-snug">Entiendo tu flujo actual de punta a punta. Dónde se pierde tiempo, dónde hay error humano.</p>
+        </div>
+        <div class="p-5 md:p-6 border-b-2 md:border-b-0 md:border-r-2 border-black">
+          <div class="mono text-[10px] uppercase tracking-widest text-gray-500 mb-3">02</div>
+          <div class="w-8 h-[2px] bg-[#00f0ff] mb-4"></div>
+          <h3 class="text-lg md:text-xl font-black uppercase tracking-tighter leading-none mb-3">Propuesta y precio</h3>
+          <p class="text-xs leading-snug">Te muestro qué se puede automatizar, cuánto tiempo te ahorra y cuánto cuesta. Sin sorpresas.</p>
+        </div>
+        <div class="p-5 md:p-6 border-b-2 md:border-b-0 md:border-r-2 border-black">
+          <div class="mono text-[10px] uppercase tracking-widest text-gray-500 mb-3">03</div>
+          <div class="w-8 h-[2px] bg-[#00f0ff] mb-4"></div>
+          <h3 class="text-lg md:text-xl font-black uppercase tracking-tighter leading-none mb-3">Build iterativo</h3>
+          <p class="text-xs leading-snug">Construyo y te muestro avances. Ajustamos sobre la marcha con tu feedback real.</p>
+        </div>
+        <div class="p-5 md:p-6 bg-black text-white">
+          <div class="mono text-[10px] uppercase tracking-widest text-gray-400 mb-3">04</div>
+          <div class="w-8 h-[2px] bg-[#f8e602] mb-4"></div>
+          <h3 class="text-lg md:text-xl font-black uppercase tracking-tighter leading-none mb-3">Entrega + docs</h3>
+          <p class="text-xs leading-snug">Te dejo el sistema andando, documentado y explicado. Para que no dependas de mí.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 bg-black text-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="md:flex md:justify-between md:items-end mb-16 gap-8">
+        <div>
+          <span class="mono text-sm uppercase bg-[#f8e602] text-black px-2 py-1 mb-8 inline-block">Pricing</span>
+          <div class="w-12 h-[2px] bg-[#00f0ff] mb-4"></div>
+          <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">Tres formas<br>de trabajar<br>juntos.</h2>
+        </div>
+        <p class="mono text-xs md:text-sm uppercase tracking-widest text-gray-300 max-w-sm mt-8 md:mt-0 leading-relaxed">
+          El precio se calcula sobre las horas que te ahorra, no sobre las horas que me lleva. Lo acordamos antes de empezar.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 border-2 border-white">
+
+        <div class="p-8 md:p-10 border-b-2 md:border-b-0 md:border-r-2 border-white flex flex-col justify-between min-h-[420px]">
+          <div>
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="text-6xl md:text-7xl font-black tracking-tighter leading-none">A</span>
+              <span class="mono text-xs uppercase text-gray-400">Script puntual</span>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 leading-none">Un proceso, una entrega.</h3>
+            <ul class="space-y-3 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Automatización de un flujo concreto</span></li>
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Código documentado y entregado</span></li>
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Sesión de traspaso</span></li>
+            </ul>
+          </div>
+          <div class="mt-10 pt-6 border-t border-gray-700">
+            <a href="#contacto" class="block w-full bg-white text-black text-center mono text-xs uppercase font-bold tracking-widest py-4 hover:bg-[#00f0ff] transition-colors">Pedí tu cotización →</a>
+          </div>
+        </div>
+
+        <div class="p-8 md:p-10 border-b-2 md:border-b-0 md:border-r-2 border-white flex flex-col justify-between min-h-[420px] bg-[#f8e602] text-black relative">
+          <div class="absolute top-0 right-0 bg-black text-[#f8e602] mono text-[10px] uppercase font-bold px-3 py-1 tracking-widest">Recomendado</div>
+          <div>
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="text-6xl md:text-7xl font-black tracking-tighter leading-none">B</span>
+              <span class="mono text-xs uppercase">Sistema completo</span>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 leading-none">Varios flujos conectados.</h3>
+            <ul class="space-y-3 text-sm leading-relaxed">
+              <li class="flex gap-3"><span>→</span><span>Múltiples procesos automatizados</span></li>
+              <li class="flex gap-3"><span>→</span><span>Documentación + soporte</span></li>
+              <li class="flex gap-3"><span>→</span><span>Iteración hasta que funcione</span></li>
+            </ul>
+          </div>
+          <div class="mt-10 pt-6 border-t border-black/30">
+            <a href="#contacto" class="block w-full bg-black text-[#f8e602] text-center mono text-xs uppercase font-bold tracking-widest py-4 hover:bg-white hover:text-black transition-colors">Pedí tu cotización →</a>
+          </div>
+        </div>
+
+        <div class="p-8 md:p-10 flex flex-col justify-between min-h-[420px]">
+          <div>
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="text-6xl md:text-7xl font-black tracking-tighter leading-none">C</span>
+              <span class="mono text-xs uppercase text-gray-400">Continua</span>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-black uppercase tracking-tighter mb-6 leading-none">Automatización mensual.</h3>
+            <ul class="space-y-3 text-sm leading-relaxed">
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Optimización continua de procesos</span></li>
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Mantenimiento e iteración</span></li>
+              <li class="flex gap-3"><span class="text-[#00f0ff]">→</span><span>Nuevos flujos a demanda</span></li>
+            </ul>
+          </div>
+          <div class="mt-10 pt-6 border-t border-gray-700">
+            <a href="#contacto" class="block w-full bg-white text-black text-center mono text-xs uppercase font-bold tracking-widest py-4 hover:bg-[#00f0ff] transition-colors">Pedí tu cotización →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contacto" class="p-6 md:p-12 md:py-32 bg-white flex flex-col items-center">
+    <div class="max-w-xl w-full text-center mb-12">
+      <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4">Hablemos</h2>
+      <p class="mono text-sm uppercase font-bold tracking-widest text-gray-600">Respuesta INMEDIATA. Todo bajo NDA.</p>
+    </div>
+
+    <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escribo%20por%20tu%20web.%20Quiero%20automatizar%20un%20proceso." target="_blank" rel="noopener" class="group max-w-2xl w-full mb-8 bg-[#00f0ff] text-black border-2 border-black p-6 md:p-8 flex items-center justify-between gap-4 hover:bg-black hover:text-[#00f0ff] transition-colors">
+      <div class="flex items-center gap-4">
+        <iconify-icon icon="lucide:message-circle" class="text-3xl md:text-4xl"></iconify-icon>
+        <div class="text-left">
+          <div class="mono text-[10px] md:text-xs uppercase tracking-widest mb-1">Vía rápida</div>
+          <div class="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none">Escribime por WhatsApp</div>
+        </div>
+      </div>
+      <span class="mono text-2xl md:text-3xl font-black group-hover:translate-x-1 transition-transform">→</span>
+    </a>
+
+    <div class="max-w-2xl w-full flex items-center gap-4 mb-8">
+      <div class="flex-1 h-[2px] bg-black"></div>
+      <span class="mono text-xs uppercase tracking-widest text-gray-500">o por email</span>
+      <div class="flex-1 h-[2px] bg-black"></div>
+    </div>
+
+    <div class="relative max-w-2xl w-full p-8 md:p-12 border border-black bg-white">
+
+      <!-- Success state -->
+      <div id="formSuccess" class="hidden text-center py-12">
+        <div class="inline-block bg-[#f8e602] text-black px-3 py-1 mono text-xs uppercase tracking-widest mb-6">Mensaje recibido</div>
+        <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6">
+          Listo. Te respondo<br>en breve.
+        </h3>
+        <p class="text-base md:text-lg leading-snug max-w-md mx-auto mb-8">
+          Te llega un mail desde <strong>cristian@hendelsec.com</strong> con los próximos pasos. Si es urgente, escribime por WhatsApp.
+        </p>
+        <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escrib%C3%AD%20por%20el%20formulario%20pero%20es%20urgente." target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-black text-[#00f0ff] mono text-sm uppercase font-bold tracking-widest px-6 py-3 hover:bg-[#00f0ff] hover:text-black transition-colors border-2 border-black">
+          <iconify-icon icon="ri:whatsapp-fill"></iconify-icon>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <!-- Error state -->
+      <div id="formError" class="hidden text-center border-2 border-[#DC2626] bg-red-50 p-6 mb-6">
+        <p class="text-base font-bold mb-2">Algo salió mal.</p>
+        <p class="text-sm">No pudimos enviar tu mensaje. Probá de nuevo o escribime por WhatsApp.</p>
+      </div>
+
+      <form id="contactForm" action="https://formsubmit.co/cristian@hendelsec.com" method="POST" class="space-y-6">
+        <input type="hidden" name="_subject" value="Nuevo contacto AUTOMATIZACIÓN desde hendelsec.com">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-2">
+            <label class="mono text-xs uppercase font-bold block">Nombre</label>
+            <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+          </div>
+          <div class="space-y-2">
+            <label class="mono text-xs uppercase font-bold block">Empresa</label>
+            <input type="text" name="empresa" placeholder="Nombre de empresa" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <label class="mono text-xs uppercase font-bold block">Email</label>
+          <input type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+        </div>
+        <div class="space-y-2">
+          <label class="mono text-xs uppercase font-bold block">Mensaje</label>
+          <textarea rows="4" name="mensaje" placeholder="Qué proceso querés automatizar..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-[#f8e602] hover:text-black border-2 border-black transition-all duration-300 rounded-[2px] disabled:opacity-60 disabled:cursor-not-allowed">
+          <span class="btn-text">Enviar</span>
+          <span class="btn-loading hidden">Enviando...</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
+    <div class="mb-8 md:mb-0">
+      <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
+      <div class="mono text-xs mt-2">Consultor de automatización © 2026</div>
+    </div>
+    <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
+      <a href="./index.html" class="hover:text-[#00f0ff] hover:line-through transition-colors">← Seguridad</a>
+      <a href="https://www.linkedin.com/in/hendel96/" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">LinkedIn →</a>
+      <a href="https://github.com/chendel00" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">GitHub →</a>
+      <a href="https://www.instagram.com/hendelsc_/" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">Instagram →</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Floating WhatsApp button (cyan) -->
+<a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escribo%20por%20tu%20web.%20Quiero%20automatizar%20un%20proceso." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" class="floating-whatsapp fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-[#00f0ff] border-2 border-black flex items-center justify-center shadow-[6px_6px_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000]" style="transition: bottom 0.3s, transform 0.2s, box-shadow 0.2s;">
+  <iconify-icon icon="ri:whatsapp-fill" class="text-2xl md:text-3xl text-black"></iconify-icon>
+</a>
+
+<!-- Back to top -->
+<button type="button" id="backToTop" class="back-to-top" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<!-- Sticky mobile CTA -->
+<a href="#contacto" id="stickyMobileCTA" class="sticky-cta-mobile">
+  <span>Pedí tu cotización</span>
+  <span class="arrow">→</span>
+</a>
+
+<script>
+(function() {
+  var progressBar = document.getElementById('scrollProgress');
+  var backToTop = document.getElementById('backToTop');
+  var stickyCTA = document.getElementById('stickyMobileCTA');
+  var ticking = false;
+
+  function updateOnScroll() {
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var scrolled = window.pageYOffset;
+    var progress = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+    if (progressBar) progressBar.style.width = progress + '%';
+    if (backToTop) {
+      if (scrolled > 600) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    if (stickyCTA && window.innerWidth < 768) {
+      var heroHeight = window.innerHeight * 0.85;
+      var nearContact = scrolled + window.innerHeight > docHeight * 0.85;
+      if (scrolled > heroHeight && !nearContact) {
+        stickyCTA.classList.add('visible');
+        document.body.classList.add('sticky-visible');
+      } else {
+        stickyCTA.classList.remove('visible');
+        document.body.classList.remove('sticky-visible');
+      }
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { window.requestAnimationFrame(updateOnScroll); ticking = true; }
+  }, { passive: true });
+
+  if (backToTop) {
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Form AJAX
+  var form = document.getElementById('contactForm');
+  var formSuccess = document.getElementById('formSuccess');
+  var formError = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (formError) formError.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.querySelector('.btn-text').classList.add('hidden');
+      submitBtn.querySelector('.btn-loading').classList.remove('hidden');
+
+      var formData = new FormData(form);
+      var ajaxAction = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+      fetch(ajaxAction, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (!response.ok) throw new Error('Network error');
+        return response.json();
+      })
+      .then(function(data) {
+        form.classList.add('hidden');
+        if (formSuccess) {
+          formSuccess.classList.remove('hidden');
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      })
+      .catch(function(err) {
+        submitBtn.disabled = false;
+        submitBtn.querySelector('.btn-text').classList.remove('hidden');
+        submitBtn.querySelector('.btn-loading').classList.add('hidden');
+        if (formError) formError.classList.remove('hidden');
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
