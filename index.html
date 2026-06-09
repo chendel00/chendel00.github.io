@@ -166,6 +166,7 @@
     .sticky-cta-mobile { display: none; }
   }
 </style>
+<script defer data-domain="hendelsec.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -206,7 +207,7 @@
       <div>
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Aplicaciones web</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
-        <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Cualquier usuario puede ver datos de otro</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Cualquier usuario puede ver datos de otro</h2>
         <p class="text-lg leading-snug mb-8">La mayoria de las brechas en aplicaciones web no requieren sofisticacion. Son fallas de logica de acceso que cualquiera puede explotar si sabe donde mirar.</p>
       </div>
       <div class="mt-12">
@@ -222,7 +223,7 @@
       <div>
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">APIs REST / GraphQL</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
-        <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Tu API expone mas de lo que muestra la interfaz</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Tu API expone mas de lo que muestra la interfaz</h2>
         <p class="text-lg leading-snug mb-8">Las APIs tienen superficie de ataque que el frontend oculta. Sin control de acceso correcto, un tercero puede extraer datos de otros usuarios sin credenciales especiales.</p>
       </div>
       <div class="mt-12">
@@ -239,7 +240,7 @@
       <div>
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Plataformas SaaS</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
-        <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Una falla expone a todos tus clientes a la vez</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Una falla expone a todos tus clientes a la vez</h2>
         <p class="text-lg leading-snug mb-8">En plataformas con multiples clientes, el aislamiento entre cuentas es critico. Cuando falla, el impacto no es individual: es reputacional, legal y simultaneo.</p>
       </div>
       <div class="mt-12">
@@ -254,7 +255,7 @@
       <div>
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Divulgacion responsable</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
-        <h2 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">El problema se resuelve antes de que alguien se entere</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">El problema se resuelve antes de que alguien se entere</h2>
         <p class="text-lg leading-snug mb-8">Cuando encontramos algo, lo coordinamos directo con tu equipo tecnico. Sin publicaciones ni exposicion publica hasta que este cerrado y verificado.</p>
       </div>
       <div class="mt-12">
@@ -292,7 +293,7 @@
         <div class="md:col-span-5 flex flex-col">
           <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block self-start">Perfil</span>
           <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
-          <h2 class="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+          <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
             Primero el negocio.<br>Después el<br><span class="text-[#0FFF50] bg-black px-2">exploit</span>.
           </h2>
 
@@ -315,7 +316,7 @@
           </div>
 
           <p class="mono text-[10px] uppercase tracking-widest text-gray-500 mt-6 max-w-sm">
-            Operations · Banca de inversión · Buenos Aires
+            Finanzas · Tecnología · Buenos Aires
           </p>
         </div>
 
@@ -380,7 +381,7 @@
         <div>
           <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Proceso</span>
           <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
-          <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+          <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none">
             Cómo<br>trabajamos.
           </h2>
         </div>
@@ -515,7 +516,7 @@
         <div>
           <span class="mono text-sm uppercase bg-white text-black px-2 py-1 mb-8 inline-block">Pricing</span>
           <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
-          <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+          <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none">
             Tres formas<br>de trabajar<br>juntos.
           </h2>
         </div>
@@ -649,7 +650,7 @@
 
       <form id="contactForm" action="https://formsubmit.co/cristian@hendelsec.com" method="POST" class="space-y-6">
         <input type="hidden" name="_subject" value="Nuevo contacto desde hendelsec.com">
-        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
