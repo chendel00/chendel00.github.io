@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cristian Hendel — Seguridad · Automatización</title>
-<meta name="description" content="Encuentro lo que puede salir mal antes de que salga, automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
+<title>Cristian Hendel — Riesgo digital · Automatización</title>
+<meta name="description" content="Encuentro lo que le puede costar plata a tu plataforma y automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Cristian Hendel — Seguridad · Automatización">
-<meta property="og:description" content="Encuentro lo que puede salir mal antes de que salga, automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
+<meta property="og:title" content="Cristian Hendel — Riesgo digital · Automatización">
+<meta property="og:description" content="Encuentro lo que le puede costar plata a tu plataforma y automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
 <meta property="og:url" content="https://hendelsec.com">
 <meta property="og:image" content="https://hendelsec.com/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -20,8 +20,8 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://hendelsec.com/og-image.png">
-<meta name="twitter:title" content="Cristian Hendel — Seguridad · Automatización">
-<meta name="twitter:description" content="Encuentro lo que puede salir mal antes de que salga, automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
+<meta name="twitter:title" content="Cristian Hendel — Riesgo digital · Automatización">
+<meta name="twitter:description" content="Encuentro lo que le puede costar plata a tu plataforma y automatizo lo que te roba tiempo. Dos servicios, mismo enfoque: entender cómo funciona tu negocio.">
 
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
@@ -99,12 +99,19 @@
   .carousel-card { scroll-snap-align: start; }
 
   /* Carousel dots (scoped: evita colisión con .dot del hash-badge) */
+  /* 12px visibles + área táctil extendida invisible (~28px) */
   #carouselDots .dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border: 2px solid #000;
     background: transparent;
     transition: background 0.2s;
+    position: relative;
+  }
+  #carouselDots .dot::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
   }
   #carouselDots .dot.active { background: #000; }
 
@@ -172,8 +179,16 @@
   @media (min-width: 768px) {
     .sticky-cta-mobile { display: none; }
   }
+
+  /* Mobile: menos elementos flotantes (queda sticky CTA + WhatsApp) y safe area iOS */
+  @media (max-width: 767px) {
+    .back-to-top { display: none; }
+    .sticky-cta-mobile { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+    .floating-whatsapp { bottom: calc(24px + env(safe-area-inset-bottom)); }
+    body.sticky-visible .floating-whatsapp { bottom: calc(76px + env(safe-area-inset-bottom)); }
+  }
 </style>
-<script defer data-domain="hendelsec.com" src="https://plausible.io/js/script.js"></script>
+<script data-goatcounter="https://hendelsec.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
@@ -181,7 +196,7 @@
 <div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
 
   <!-- HEADER -->
-  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-10 md:py-12 gap-6">
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-12 gap-4 md:gap-6">
     <nav class="flex items-center gap-6 mono text-sm md:text-base uppercase font-black tracking-tighter">
       <span class="bg-black text-white px-3 py-1">Seguridad</span>
       <a href="./automation.html" class="hover:text-[#0FFF50] transition-colors">Automatización</a>
@@ -202,7 +217,7 @@
         <span>response &lt; 4h</span>
       </div>
       <p class="text-2xl md:text-4xl max-w-3xl font-bold leading-tight">
-        Identifico vulnerabilidades en plataformas digitales antes de que las encuentren otros.
+        Encuentro lo que le puede costar plata a tu plataforma antes de que se lo encuentre otro.
       </p>
     </div>
   </section>
@@ -219,9 +234,9 @@
       </div>
       <div class="mt-12">
         <div class="bg-white border border-black p-5 mono text-[10px] md:text-xs uppercase font-bold flex flex-wrap gap-2">
-          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white mono text-xs uppercase font-bold">IDOR</span>
-          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white mono text-xs uppercase font-bold">SQLi</span>
-          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white mono text-xs uppercase font-bold">Broken Auth</span>
+          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white text-gray-600 tracking-wider">IDOR</span>
+          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white text-gray-600 tracking-wider">SQLi</span>
+          <span class="border-l-2 border-[#DC2626] px-3 py-1 bg-white text-gray-600 tracking-wider">Broken Auth</span>
         </div>
       </div>
     </article>
@@ -301,7 +316,7 @@
           <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block self-start">Perfil</span>
           <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
           <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
-            Primero el negocio.<br>Después el<br><span class="text-[#0FFF50] bg-black px-2">exploit</span>.
+            El riesgo no está<br>en el código.<br>Está en tu <span class="text-[#0FFF50] bg-black px-2">negocio</span>.
           </h2>
 
           <!-- Photo frame -->
@@ -365,12 +380,12 @@
           </div>
 
           <div class="mt-8 bg-white border border-black p-5 mono text-[10px] md:text-xs uppercase font-bold flex flex-wrap gap-2">
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">Python</span>
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">Burp Suite</span>
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">mitmproxy</span>
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">CVSS v3.1</span>
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">OWASP Top 10</span>
-            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white">curl_cffi</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">Python</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">Burp Suite</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">mitmproxy</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">CVSS v3.1</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">OWASP Top 10</span>
+            <span class="border-l-2 border-[#0FFF50] px-3 py-1 bg-white text-gray-600 tracking-wider">curl_cffi</span>
           </div>
 
         </div>
@@ -494,7 +509,7 @@
 
         <!-- Dots indicator + swipe hint -->
         <div class="flex flex-col items-center mt-6 gap-3">
-          <div class="flex justify-center gap-2" id="carouselDots">
+          <div class="flex justify-center gap-4" id="carouselDots">
             <div class="dot active" data-step="0"></div>
             <div class="dot" data-step="1"></div>
             <div class="dot" data-step="2"></div>
@@ -691,7 +706,7 @@
   <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
     <div class="mb-8 md:mb-0">
       <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
-      <div class="mono text-xs mt-2">Consultor de Seguridad © 2026</div>
+      <div class="mono text-xs mt-2">Riesgo digital · Automatización © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
       <a href="./caso-real.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Caso real →</a>

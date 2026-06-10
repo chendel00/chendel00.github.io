@@ -64,15 +64,18 @@
   }
   .back-to-top.visible { opacity: 1; pointer-events: auto; }
   .back-to-top:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #0FFF50; }
+  @media (max-width: 767px) {
+    .back-to-top { display: none; }
+  }
 </style>
-<script defer data-domain="hendelsec.com" src="https://plausible.io/js/script.js"></script>
+<script data-goatcounter="https://hendelsec.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
 
   <!-- HEADER w/ back link -->
-  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-10 md:py-12 gap-6">
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-12 gap-4 md:gap-6">
     <a href="./index.html" class="mono text-xs md:text-sm uppercase font-black tracking-widest hover:text-[#0FFF50] transition-colors">← Volver al inicio</a>
     <span class="bg-black text-white px-6 py-3 mono text-sm md:text-base uppercase font-bold tracking-widest whitespace-nowrap">Caso real</span>
   </header>
@@ -253,7 +256,7 @@
   <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
     <div class="mb-8 md:mb-0">
       <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
-      <div class="mono text-xs mt-2">Consultor de Seguridad © 2026</div>
+      <div class="mono text-xs mt-2">Riesgo digital · Automatización © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
       <a href="./index.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Inicio →</a>
