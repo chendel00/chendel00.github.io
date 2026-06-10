@@ -76,6 +76,8 @@
   /* Photo frame */
   .corner-marker { position: absolute; width: 16px; height: 16px; }
 
+  ::selection { background: #f8e602; color: #000; }
+
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: #fff; }
   ::-webkit-scrollbar-thumb { background: #000; border: 2px solid #fff; }
@@ -483,21 +485,21 @@
         <input type="text" name="_honey" style="display:none">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label class="mono text-xs uppercase font-bold block">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <label for="f-nombre" class="mono text-xs uppercase font-bold block">Nombre</label>
+            <input id="f-nombre" type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#f8e602] transition-colors rounded-[2px]" required>
           </div>
           <div class="space-y-2">
-            <label class="mono text-xs uppercase font-bold block">Empresa</label>
-            <input type="text" name="empresa" placeholder="Nombre de empresa" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <label for="f-empresa" class="mono text-xs uppercase font-bold block">Empresa</label>
+            <input id="f-empresa" type="text" name="empresa" placeholder="Nombre de empresa" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#f8e602] transition-colors rounded-[2px]" required>
           </div>
         </div>
         <div class="space-y-2">
-          <label class="mono text-xs uppercase font-bold block">Email</label>
-          <input type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+          <label for="f-email" class="mono text-xs uppercase font-bold block">Email</label>
+          <input id="f-email" type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#f8e602] transition-colors rounded-[2px]" required>
         </div>
         <div class="space-y-2">
-          <label class="mono text-xs uppercase font-bold block">Mensaje</label>
-          <textarea rows="4" name="mensaje" placeholder="Qué proceso querés automatizar..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
+          <label for="f-mensaje" class="mono text-xs uppercase font-bold block">Mensaje</label>
+          <textarea id="f-mensaje" rows="4" name="mensaje" placeholder="Qué proceso querés automatizar..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#f8e602] transition-colors rounded-[2px] resize-none" required></textarea>
         </div>
         <button type="submit" id="submitBtn" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-[#f8e602] hover:text-black border-2 border-black transition-all duration-300 rounded-[2px] disabled:opacity-60 disabled:cursor-not-allowed">
           <span class="btn-text">Enviar</span>
@@ -511,7 +513,7 @@
   <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
     <div class="mb-8 md:mb-0">
       <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
-      <div class="mono text-xs mt-2">Consultor de automatización © 2026</div>
+      <div class="mono text-xs mt-2">Consultor de Automatización © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
       <a href="./index.html" class="hover:text-[#00f0ff] hover:line-through transition-colors">← Seguridad</a>

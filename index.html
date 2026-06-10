@@ -98,15 +98,18 @@
   .carousel-track::-webkit-scrollbar { display: none; }
   .carousel-card { scroll-snap-align: start; }
 
-  /* Carousel dots */
-  .dot {
+  /* Carousel dots (scoped: evita colisión con .dot del hash-badge) */
+  #carouselDots .dot {
     width: 8px;
     height: 8px;
     border: 2px solid #000;
     background: transparent;
     transition: background 0.2s;
   }
-  .dot.active { background: #000; }
+  #carouselDots .dot.active { background: #000; }
+
+  /* Selección de texto en verde marca */
+  ::selection { background: #0FFF50; color: #000; }
 
   /* Back to top button */
   .back-to-top {
@@ -212,7 +215,7 @@
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Aplicaciones web</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
         <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Cualquier usuario puede ver datos de otro</h2>
-        <p class="text-lg leading-snug mb-8">La mayoria de las brechas en aplicaciones web no requieren sofisticacion. Son fallas de logica de acceso que cualquiera puede explotar si sabe donde mirar.</p>
+        <p class="text-lg leading-snug mb-8">La mayoría de las brechas en aplicaciones web no requieren sofisticación. Son fallas de lógica de acceso que cualquiera puede explotar si sabe dónde mirar.</p>
       </div>
       <div class="mt-12">
         <div class="bg-white border border-black p-5 mono text-[10px] md:text-xs uppercase font-bold flex flex-wrap gap-2">
@@ -227,7 +230,7 @@
       <div>
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">APIs REST / GraphQL</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
-        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Tu API expone mas de lo que muestra la interfaz</h2>
+        <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Tu API expone más de lo que muestra la interfaz</h2>
         <p class="text-lg leading-snug mb-8">Las APIs tienen superficie de ataque que el frontend oculta. Sin control de acceso correcto, un tercero puede extraer datos de otros usuarios sin credenciales especiales.</p>
       </div>
       <div class="mt-12">
@@ -245,7 +248,7 @@
         <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Plataformas SaaS</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
         <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">Una falla expone a todos tus clientes a la vez</h2>
-        <p class="text-lg leading-snug mb-8">En plataformas con multiples clientes, el aislamiento entre cuentas es critico. Cuando falla, el impacto no es individual: es reputacional, legal y simultaneo.</p>
+        <p class="text-lg leading-snug mb-8">En plataformas con múltiples clientes, el aislamiento entre cuentas es crítico. Cuando falla, el impacto no es individual: es reputacional, legal y simultáneo.</p>
       </div>
       <div class="mt-12">
         <div class="bg-white border border-black p-5 mono text-[10px] md:text-xs uppercase font-bold flex flex-wrap justify-between items-center gap-4">
@@ -257,10 +260,10 @@
 
     <article class="p-6 md:p-12 flex flex-col justify-between min-h-[400px]">
       <div>
-        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Divulgacion responsable</span>
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Divulgación responsable</span>
         <div class="w-12 h-[2px] bg-[#DC2626] mb-4"></div>
         <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tighter mb-6 leading-none">El problema se resuelve antes de que alguien se entere</h2>
-        <p class="text-lg leading-snug mb-8">Cuando encontramos algo, lo coordinamos directo con tu equipo tecnico. Sin publicaciones ni exposicion publica hasta que este cerrado y verificado.</p>
+        <p class="text-lg leading-snug mb-8">Cuando encontramos algo, lo coordinamos directo con tu equipo técnico. Sin publicaciones ni exposición pública hasta que esté cerrado y verificado.</p>
       </div>
       <div class="mt-12">
         <div class="bg-white border border-black p-5 mono text-[10px] md:text-xs uppercase font-bold flex flex-wrap justify-between items-center gap-4">
@@ -659,21 +662,21 @@
         <input type="text" name="_honey" style="display:none">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
-            <label class="mono text-xs uppercase font-bold block">Nombre</label>
-            <input type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <label for="f-nombre" class="mono text-xs uppercase font-bold block">Nombre</label>
+            <input id="f-nombre" type="text" name="nombre" placeholder="Nombre Completo" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#0FFF50] transition-colors rounded-[2px]" required>
           </div>
           <div class="space-y-2">
-            <label class="mono text-xs uppercase font-bold block">Empresa</label>
-            <input type="text" name="empresa" placeholder="Nombre de empresa" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+            <label for="f-empresa" class="mono text-xs uppercase font-bold block">Empresa</label>
+            <input id="f-empresa" type="text" name="empresa" placeholder="Nombre de empresa" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#0FFF50] transition-colors rounded-[2px]" required>
           </div>
         </div>
         <div class="space-y-2">
-          <label class="mono text-xs uppercase font-bold block">Email</label>
-          <input type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px]" required>
+          <label for="f-email" class="mono text-xs uppercase font-bold block">Email</label>
+          <input id="f-email" type="email" name="email" placeholder="email@empresa.com" class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#0FFF50] transition-colors rounded-[2px]" required>
         </div>
         <div class="space-y-2">
-          <label class="mono text-xs uppercase font-bold block">Mensaje</label>
-          <textarea rows="4" name="mensaje" placeholder="Contame sobre tu plataforma..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 rounded-[2px] resize-none" required></textarea>
+          <label for="f-mensaje" class="mono text-xs uppercase font-bold block">Mensaje</label>
+          <textarea id="f-mensaje" rows="4" name="mensaje" placeholder="Contame sobre tu plataforma..." class="w-full border-b-2 border-black p-3 focus:outline-none focus:bg-gray-50 focus:border-[#0FFF50] transition-colors rounded-[2px] resize-none" required></textarea>
         </div>
         <button type="submit" id="submitBtn" class="w-full bg-black text-white font-black uppercase py-6 text-xl hover:bg-white hover:text-black border-2 border-black transition-all duration-300 rounded-[2px] disabled:opacity-60 disabled:cursor-not-allowed">
           <span class="btn-text">Enviar</span>
@@ -688,7 +691,7 @@
   <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
     <div class="mb-8 md:mb-0">
       <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
-      <div class="mono text-xs mt-2">Security Consultant © 2026</div>
+      <div class="mono text-xs mt-2">Consultor de Seguridad © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
       <a href="./caso-real.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Caso real →</a>

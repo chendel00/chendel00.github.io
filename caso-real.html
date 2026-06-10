@@ -4,6 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caso real — Cristian Hendel</title>
+<meta name="description" content="Account takeover sin credenciales en una plataforma SaaS B2B multi-tenant. Dos hallazgos críticos, divulgación responsable bajo ISO/IEC 29147. Caso real documentado.">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caso real — Account takeover sin credenciales">
+<meta property="og:description" content="Plataforma SaaS B2B multi-tenant. Dos críticos, tres altos, un medio. Divulgación responsable documentada.">
+<meta property="og:url" content="https://hendelsec.com/caso-real">
+<meta property="og:image" content="https://hendelsec.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://hendelsec.com/og-image.png">
+<meta name="twitter:title" content="Caso real — Account takeover sin credenciales">
+<meta name="twitter:description" content="Plataforma SaaS B2B multi-tenant. Dos críticos, tres altos, un medio.">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,10 +38,37 @@
     text-rendering: optimizeLegibility;
   }
   .mono { font-family: 'Space Mono', monospace; }
+  ::selection { background: #0FFF50; color: #000; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #fff; }
+  ::-webkit-scrollbar-thumb { background: #000; border: 2px solid #fff; }
+  html { scroll-behavior: smooth; }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: #0FFF50; width: 0%; z-index: 100;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 8px rgba(15, 255, 80, 0.4);
+  }
+
+  /* Back to top button */
+  .back-to-top {
+    position: fixed; bottom: 24px; left: 24px;
+    width: 48px; height: 48px; background: #000; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 4px 4px 0 #0FFF50; z-index: 40;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s, transform 0.15s, box-shadow 0.15s;
+    border: 2px solid #000;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #0FFF50; }
 </style>
 <script defer data-domain="hendelsec.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 <div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
 
   <!-- HEADER w/ back link -->
@@ -205,15 +253,53 @@
   <footer class="border-t-2 border-black p-6 md:p-12 md:flex justify-between items-end">
     <div class="mb-8 md:mb-0">
       <div class="text-4xl font-black uppercase tracking-tighter">Hendel</div>
-      <div class="mono text-xs mt-2">Security Consultant © 2026</div>
+      <div class="mono text-xs mt-2">Consultor de Seguridad © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
       <a href="./index.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Inicio →</a>
+      <a href="./automation.html" class="hover:text-[#0FFF50] hover:line-through transition-colors">Automatización →</a>
       <a href="https://www.linkedin.com/in/hendel96/" target="_blank" rel="noopener" class="hover:text-[#0FFF50] hover:line-through transition-colors">LinkedIn →</a>
       <a href="https://github.com/chendel00" target="_blank" rel="noopener" class="hover:text-[#0FFF50] hover:line-through transition-colors">GitHub →</a>
+      <a href="https://www.instagram.com/hendelsc_/" target="_blank" rel="noopener" class="hover:text-[#0FFF50] hover:line-through transition-colors">Instagram →</a>
     </div>
   </footer>
 
 </div>
+
+<!-- Back to top button -->
+<button type="button" id="backToTop" class="back-to-top" aria-label="Volver arriba">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script>
+(function() {
+  var progressBar = document.getElementById('scrollProgress');
+  var backToTop = document.getElementById('backToTop');
+  var ticking = false;
+
+  function updateOnScroll() {
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var scrolled = window.pageYOffset;
+    if (progressBar) progressBar.style.width = (docHeight > 0 ? (scrolled / docHeight) * 100 : 0) + '%';
+    if (backToTop) {
+      if (scrolled > 600) backToTop.classList.add('visible');
+      else backToTop.classList.remove('visible');
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) { window.requestAnimationFrame(updateOnScroll); ticking = true; }
+  }, { passive: true });
+
+  if (backToTop) {
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+</script>
 </body>
 </html>
