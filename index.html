@@ -208,7 +208,7 @@
 <div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
 
   <!-- HEADER -->
-  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-12 gap-4 md:gap-6">
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-8 gap-4 md:gap-6">
     <nav class="flex items-center gap-6 mono text-sm md:text-base uppercase font-black tracking-tighter">
       <span class="bg-black text-white px-3 py-1">Seguridad</span>
       <a href="./automation.html" class="hover:text-[#0FFF50] transition-colors">Automatización</a>
@@ -217,12 +217,12 @@
   </header>
 
   <!-- HERO -->
-  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 overflow-hidden">
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto">
-      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] uppercase tracking-tighter mb-8">
+      <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-[8.5rem] font-black leading-[0.9] uppercase tracking-tighter mb-8">
         Cristian Hendel
       </h1>
-      <div class="term-badge mb-12">
+      <div class="term-badge mb-10">
         <div class="term-host">cris@hendelsec:~$</div>
         <div class="term-line">&gt;&nbsp;<span id="termTyped"></span><span class="term-cursor"></span></div>
       </div>
@@ -317,18 +317,34 @@
   </a>
 
   <!-- BACKGROUND / WHY ME -->
-  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 bg-white">
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto">
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
 
-        <div class="md:col-span-5 flex flex-col">
-          <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block self-start">Perfil</span>
+        <div class="md:col-span-5">
+          <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Perfil</span>
           <div class="w-12 h-[2px] bg-[#0FFF50] mb-4"></div>
-          <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+          <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
             El riesgo no está<br>en el código.<br>Está en tu <span class="text-[#0FFF50] bg-black px-2">negocio</span>.
           </h2>
+        </div>
 
+        <div class="md:col-span-7 flex flex-col justify-center">
+          <div class="space-y-6 text-lg md:text-xl leading-snug">
+            <p>
+              Vengo de <strong>operations en banca de inversión</strong>. Construí pipelines de datos, automaticé 1.650 horas anuales de procesos manuales, y terminé una Maestría en Finanzas antes de tocar mi primer payload.
+            </p>
+            <p>
+              Eso cambia cómo leo una plataforma. <strong>No miro código aislado: miro flujos de negocio.</strong> El IDOR no es un bug técnico: es el cliente A viendo facturas del cliente B. La SQLi no es una curiosidad académica: es un atacante con tu base de usuarios en una tarde.
+            </p>
+            <p>
+              Encuentro lo que encuentro porque <strong>entiendo qué tiene valor en tu plataforma</strong>, no solo dónde está mal escrito el código.
+            </p>
+          </div>
+        </div>
+
+        <div class="md:col-span-5">
           <!-- Photo frame -->
           <div class="relative max-w-sm">
             <div class="absolute inset-0 bg-black translate-x-2 translate-y-2"></div>
@@ -352,21 +368,9 @@
           </p>
         </div>
 
-        <div class="md:col-span-7 flex flex-col justify-between">
+        <div class="md:col-span-7 flex flex-col justify-center">
 
-          <div class="space-y-6 text-lg md:text-xl leading-snug">
-            <p>
-              Vengo de <strong>operations en banca de inversión</strong>. Construí pipelines de datos, automaticé 1.650 horas anuales de procesos manuales, y terminé una Maestría en Finanzas antes de tocar mi primer payload.
-            </p>
-            <p>
-              Eso cambia cómo leo una plataforma. <strong>No miro código aislado: miro flujos de negocio.</strong> El IDOR no es un bug técnico: es el cliente A viendo facturas del cliente B. La SQLi no es una curiosidad académica: es un atacante con tu base de usuarios en una tarde.
-            </p>
-            <p>
-              Encuentro lo que encuentro porque <strong>entiendo qué tiene valor en tu plataforma</strong>, no solo dónde está mal escrito el código.
-            </p>
-          </div>
-
-          <div class="mt-12 grid grid-cols-2 md:grid-cols-4 border-2 border-black">
+          <div class="grid grid-cols-2 md:grid-cols-4 border-2 border-black">
             <div class="p-4 md:p-6 border-r-2 border-black">
               <div class="mono text-[10px] uppercase text-gray-500 mb-2">Automatización</div>
               <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">1.650h</div>

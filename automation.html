@@ -140,7 +140,7 @@
 <div class="min-h-screen border-x-0 md:border-x-[20px] border-white">
 
   <!-- HEADER -->
-  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-12 gap-4 md:gap-6">
+  <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-8 gap-4 md:gap-6">
     <nav class="flex items-center gap-6 mono text-sm md:text-base uppercase font-black tracking-tighter">
       <a href="./index.html" class="hover:text-[#00f0ff] transition-colors">Seguridad</a>
       <span class="bg-[#f8e602] text-black px-3 py-1">Automatización</span>
@@ -149,7 +149,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 overflow-hidden relative">
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-20 overflow-hidden relative">
     <div class="scanline absolute top-0 left-0 right-0 h-[3px] bg-[#f8e602]"></div>
     <div class="max-w-7xl mx-auto">
       <h1 class="font-black leading-[0.9] uppercase tracking-tighter mb-8" style="font-size: clamp(2.4rem, 7.5vw, 5.5rem);">
@@ -254,15 +254,32 @@
   </section>
 
   <!-- PERFIL -->
-  <section class="border-b-2 border-black p-6 md:p-12 md:py-32 bg-white">
+  <section class="border-b-2 border-black p-6 md:p-12 md:py-20 bg-white">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
 
-      <div class="md:col-span-5 flex flex-col">
-        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block self-start">Perfil</span>
+      <div class="md:col-span-5">
+        <span class="mono text-sm uppercase bg-black text-white px-2 py-1 mb-8 inline-block">Perfil</span>
         <div class="w-12 h-[2px] bg-[#00f0ff] mb-4"></div>
-        <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+        <h2 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-none">
           Entiendo el<br>negocio, no<br>solo el <span class="bg-[#f8e602] text-black px-2">código</span>.
         </h2>
+      </div>
+
+      <div class="md:col-span-7 flex flex-col justify-center">
+        <div class="space-y-6 text-lg md:text-xl leading-snug">
+          <p>
+            Vengo de <strong>operations en banca de inversión</strong>. No automatizo desde afuera mirando un diagrama: viví el proceso manual, lo sufrí, y por eso sé exactamente dónde está el cuello de botella real.
+          </p>
+          <p>
+            En mi rol actual <strong>automaticé 1.650 horas anuales</strong> de trabajo manual con Python, SQL y Alteryx. No es teoría: es producción, con datos sensibles, en una de las instituciones financieras más grandes del mundo.
+          </p>
+          <p>
+            Cuando automatizo un proceso, <strong>entiendo qué pasa si sale mal en el negocio</strong>, no solo si tira un error el script. Esa diferencia es lo que separa una automatización que aguanta de una que rompe en el primer caso borde.
+          </p>
+        </div>
+      </div>
+
+      <div class="md:col-span-5">
         <div class="relative max-w-sm">
           <div class="absolute inset-0 bg-black translate-x-2 translate-y-2"></div>
           <div class="relative border-2 border-black bg-gray-200 aspect-[4/5] overflow-hidden">
@@ -278,20 +295,9 @@
         </p>
       </div>
 
-      <div class="md:col-span-7 flex flex-col justify-between">
-        <div class="space-y-6 text-lg md:text-xl leading-snug">
-          <p>
-            Vengo de <strong>operations en banca de inversión</strong>. No automatizo desde afuera mirando un diagrama: viví el proceso manual, lo sufrí, y por eso sé exactamente dónde está el cuello de botella real.
-          </p>
-          <p>
-            En mi rol actual <strong>automaticé 1.650 horas anuales</strong> de trabajo manual con Python, SQL y Alteryx. No es teoría: es producción, con datos sensibles, en una de las instituciones financieras más grandes del mundo.
-          </p>
-          <p>
-            Cuando automatizo un proceso, <strong>entiendo qué pasa si sale mal en el negocio</strong>, no solo si tira un error el script. Esa diferencia es lo que separa una automatización que aguanta de una que rompe en el primer caso borde.
-          </p>
-        </div>
+      <div class="md:col-span-7 flex flex-col justify-center">
 
-        <div class="mt-12 grid grid-cols-2 md:grid-cols-4 border-2 border-black">
+        <div class="grid grid-cols-2 md:grid-cols-4 border-2 border-black">
           <div class="p-4 md:p-6 border-r-2 border-black">
             <div class="mono text-[10px] uppercase text-gray-500 mb-2">Automatizado</div>
             <div class="text-3xl md:text-4xl font-black tracking-tighter leading-none">1.650h</div>
