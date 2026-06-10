@@ -22,13 +22,16 @@
 <meta name="twitter:title" content="Cristian Hendel — Automatización">
 <meta name="twitter:description" content="Convierto procesos manuales en código.">
 
+<link rel="canonical" href="https://hendelsec.com/automation">
+<meta name="theme-color" content="#000000">
+
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
 <style>
   :root {
     --yellow: #f8e602;
@@ -42,24 +45,6 @@
   }
   .mono { font-family: 'Space Mono', monospace; }
 
-  /* Badge (hero) */
-  .hash-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #000;
-    color: #fff;
-    padding: 8px 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.875rem;
-    letter-spacing: 0.05em;
-  }
-  .hash-badge .dot {
-    width: 8px;
-    height: 8px;
-    background: var(--cyan);
-    box-shadow: 0 0 8px var(--cyan);
-  }
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.3; }
@@ -72,9 +57,6 @@
     45%,55% { opacity: 0; }
   }
   .scanline { animation: flicker 3s linear infinite; }
-
-  /* Photo frame */
-  .corner-marker { position: absolute; width: 16px; height: 16px; }
 
   ::selection { background: #f8e602; color: #000; }
 
@@ -131,6 +113,22 @@
     .floating-whatsapp { bottom: calc(24px + env(safe-area-inset-bottom)); }
     body.sticky-visible .floating-whatsapp { bottom: calc(76px + env(safe-area-inset-bottom)); }
   }
+
+  /* Focus visible: navegación con teclado (currentColor se adapta a cada sección) */
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* Respeta prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 </style>
 <script data-goatcounter="https://hendelsec.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
@@ -142,7 +140,7 @@
   <!-- HEADER -->
   <header class="border-b-2 border-black flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:px-12 py-6 md:py-8 gap-4 md:gap-6">
     <nav class="flex items-center gap-6 mono text-sm md:text-base uppercase font-black tracking-tighter">
-      <a href="./index.html" class="hover:text-[#00f0ff] transition-colors">Seguridad</a>
+      <a href="./index.html" class="px-3 py-1 hover:bg-[#00f0ff] hover:text-black transition-colors">Seguridad</a>
       <span class="bg-[#f8e602] text-black px-3 py-1">Automatización</span>
     </nav>
     <span class="bg-black text-white px-6 py-3 mono text-sm md:text-base uppercase font-bold tracking-widest whitespace-nowrap">Buenos Aires, AR</span>
@@ -190,7 +188,11 @@
         el.textContent = i;
         if (i < target) setTimeout(function(){ tick(i + 1); }, delays[i] || 150);
       }
-      setTimeout(function(){ tick(0); }, 800);
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = target;
+      } else {
+        setTimeout(function(){ tick(0); }, 800);
+      }
     })();
   </script>
 
@@ -283,7 +285,7 @@
         <div class="relative max-w-sm">
           <div class="absolute inset-0 bg-black translate-x-2 translate-y-2"></div>
           <div class="relative border-2 border-black bg-gray-200 aspect-[4/5] overflow-hidden">
-            <img src="./cris.jpg" alt="Cristian Hendel" class="w-full h-full object-cover grayscale contrast-110" onerror="this.style.display='none';">
+            <img src="./cris.jpg" alt="Cristian Hendel" width="800" height="1000" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale contrast-110" onerror="this.style.display='none';">
           </div>
           <div class="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-[#00f0ff]"></div>
           <div class="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-[#00f0ff]"></div>
@@ -454,7 +456,7 @@
 
     <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escribo%20por%20tu%20web.%20Quiero%20automatizar%20un%20proceso." target="_blank" rel="noopener" class="group max-w-2xl w-full mb-8 bg-[#00f0ff] text-black border-2 border-black p-6 md:p-8 flex items-center justify-between gap-4 hover:bg-black hover:text-[#00f0ff] transition-colors">
       <div class="flex items-center gap-4">
-        <iconify-icon icon="lucide:message-circle" class="text-3xl md:text-4xl"></iconify-icon>
+        <iconify-icon icon="lucide:message-circle" class="text-3xl md:text-4xl" aria-hidden="true"></iconify-icon>
         <div class="text-left">
           <div class="mono text-[10px] md:text-xs uppercase tracking-widest mb-1">Vía rápida</div>
           <div class="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none">Escribime por WhatsApp</div>
@@ -472,7 +474,7 @@
     <div class="relative max-w-2xl w-full p-8 md:p-12 border border-black bg-white">
 
       <!-- Success state -->
-      <div id="formSuccess" class="hidden text-center py-12">
+      <div id="formSuccess" role="status" class="hidden text-center py-12">
         <div class="inline-block bg-[#f8e602] text-black px-3 py-1 mono text-xs uppercase tracking-widest mb-6">Mensaje recibido</div>
         <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-none mb-6">
           Listo. Te respondo<br>en breve.
@@ -481,13 +483,13 @@
           Te llega un mail desde <strong>cristian@hendelsec.com</strong> con los próximos pasos. Si es urgente, escribime por WhatsApp.
         </p>
         <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escrib%C3%AD%20por%20el%20formulario%20pero%20es%20urgente." target="_blank" rel="noopener" class="inline-flex items-center gap-3 bg-black text-[#00f0ff] mono text-sm uppercase font-bold tracking-widest px-6 py-3 hover:bg-[#00f0ff] hover:text-black transition-colors border-2 border-black">
-          <iconify-icon icon="ri:whatsapp-fill"></iconify-icon>
+          <iconify-icon icon="ri:whatsapp-fill" aria-hidden="true"></iconify-icon>
           Escribir por WhatsApp
         </a>
       </div>
 
       <!-- Error state -->
-      <div id="formError" class="hidden text-center border-2 border-[#DC2626] bg-red-50 p-6 mb-6">
+      <div id="formError" role="alert" class="hidden text-center border-2 border-[#DC2626] bg-red-50 p-6 mb-6">
         <p class="text-base font-bold mb-2">Algo salió mal.</p>
         <p class="text-sm">No pudimos enviar tu mensaje. Probá de nuevo o escribime por WhatsApp.</p>
       </div>
@@ -496,7 +498,7 @@
         <input type="hidden" name="_subject" value="Nuevo contacto AUTOMATIZACIÓN desde hendelsec.com">
         <input type="hidden" name="_captcha" value="true">
         <input type="hidden" name="_template" value="table">
-        <input type="text" name="_honey" style="display:none">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-2">
             <label for="f-nombre" class="mono text-xs uppercase font-bold block">Nombre</label>
@@ -530,10 +532,10 @@
       <div class="mono text-xs mt-2">Riesgo digital · Automatización © 2026</div>
     </div>
     <div class="flex flex-col items-start md:items-end mono text-lg md:text-xl uppercase font-black tracking-tighter space-y-3">
-      <a href="./index.html" class="hover:text-[#00f0ff] hover:line-through transition-colors">← Seguridad</a>
-      <a href="https://www.linkedin.com/in/hendel96/" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">LinkedIn →</a>
-      <a href="https://github.com/chendel00" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">GitHub →</a>
-      <a href="https://www.instagram.com/hendelsc_/" target="_blank" rel="noopener" class="hover:text-[#00f0ff] hover:line-through transition-colors">Instagram →</a>
+      <a href="./index.html" class="px-2 -mx-2 hover:bg-[#00f0ff] hover:text-black hover:line-through transition-colors">← Seguridad</a>
+      <a href="https://www.linkedin.com/in/hendel96/" target="_blank" rel="noopener" class="px-2 -mx-2 hover:bg-[#00f0ff] hover:text-black hover:line-through transition-colors">LinkedIn →</a>
+      <a href="https://github.com/chendel00" target="_blank" rel="noopener" class="px-2 -mx-2 hover:bg-[#00f0ff] hover:text-black hover:line-through transition-colors">GitHub →</a>
+      <a href="https://www.instagram.com/hendelsc_/" target="_blank" rel="noopener" class="px-2 -mx-2 hover:bg-[#00f0ff] hover:text-black hover:line-through transition-colors">Instagram →</a>
     </div>
   </footer>
 
@@ -541,7 +543,7 @@
 
 <!-- Floating WhatsApp button (cyan) -->
 <a href="https://wa.me/5491121615212?text=Hola%20Cristian%2C%20te%20escribo%20por%20tu%20web.%20Quiero%20automatizar%20un%20proceso." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" class="floating-whatsapp fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-[#00f0ff] border-2 border-black flex items-center justify-center shadow-[6px_6px_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_#000]" style="transition: bottom 0.3s, transform 0.2s, box-shadow 0.2s;">
-  <iconify-icon icon="ri:whatsapp-fill" class="text-2xl md:text-3xl text-black"></iconify-icon>
+  <iconify-icon icon="ri:whatsapp-fill" class="text-2xl md:text-3xl text-black" aria-hidden="true"></iconify-icon>
 </a>
 
 <!-- Back to top -->

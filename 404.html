@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Cristian Hendel</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔒</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@900&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  /* Sin Tailwind: página mínima, carga instantánea */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Archivo', sans-serif;
+    background: #fff;
+    color: #000;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+  }
+  ::selection { background: #0FFF50; color: #000; }
+  .mono { font-family: 'Space Mono', monospace; }
+  .term {
+    display: inline-block;
+    background: #000;
+    color: #0FFF50;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    padding: 10px 16px;
+    margin-bottom: 40px;
+    text-align: left;
+    max-width: 100%;
+  }
+  .term .host { color: #777; font-size: 12px; display: block; margin-bottom: 4px; }
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #0FFF50;
+    vertical-align: -2px;
+    animation: blink 1.06s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  h1 {
+    font-weight: 900;
+    font-size: clamp(6rem, 22vw, 14rem);
+    line-height: 0.9;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  h1 span { background: #000; color: #0FFF50; padding: 0 12px; }
+  p.sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+  a.back {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 2px solid #000;
+    transition: background 0.2s, color 0.2s;
+  }
+  a.back:hover { background: #0FFF50; color: #000; }
+  a.back:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+<script data-goatcounter="https://hendelsec.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+  <div class="term" aria-hidden="true">
+    <span class="host">cris@hendelsec:~$</span>
+    &gt;&nbsp;ruta no encontrada<span class="cursor"></span>
+  </div>
+  <h1>4<span>0</span>4</h1>
+  <p class="sub">Esta página no existe.</p>
+  <a class="back" href="/">← Volver al inicio</a>
+</body>
+</html>
