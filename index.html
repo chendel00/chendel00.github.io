@@ -36,26 +36,38 @@
     50% { opacity: 0.3; }
   }
   .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-  .hash-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+
+  /* Terminal badge (hero): tipea y borra frases en loop, sin claims */
+  .term-badge {
+    display: inline-block;
     background: #000;
-    color: #fff;
-    padding: 8px 14px;
+    padding: 10px 16px;
+    min-width: 300px;
+    max-width: 100%;
+  }
+  .term-badge .term-host {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 4px;
+  }
+  .term-badge .term-line {
     font-family: 'Space Mono', monospace;
     font-size: 0.875rem;
-    letter-spacing: 0.05em;
-    vertical-align: middle;
-    margin-left: 16px;
-    position: relative;
-    top: -0.4em;
+    color: #0FFF50;
+    white-space: nowrap;
   }
-  .hash-badge .dot {
+  .term-cursor {
+    display: inline-block;
     width: 8px;
-    height: 8px;
+    height: 15px;
     background: #0FFF50;
-    box-shadow: 0 0 8px #0FFF50;
+    vertical-align: -2px;
+    animation: term-blink 1.06s steps(1) infinite;
+  }
+  @keyframes term-blink { 50% { opacity: 0; } }
+  @media (max-width: 380px) {
+    .term-badge .term-line { font-size: 12px; }
   }
   body {
     font-family: 'Archivo', sans-serif;
@@ -210,11 +222,9 @@
       <h1 class="text-5xl sm:text-6xl md:text-8xl lg:text-[10rem] font-black leading-[0.9] uppercase tracking-tighter mb-8">
         Cristian Hendel
       </h1>
-      <div class="hash-badge !ml-0 !top-0 mb-12">
-        <span class="dot pulse-dot"></span>
-        <span>uptime 99.97%</span>
-        <span class="text-gray-500">·</span>
-        <span>response &lt; 4h</span>
+      <div class="term-badge mb-12">
+        <div class="term-host">cris@hendelsec:~$</div>
+        <div class="term-line">&gt;&nbsp;<span id="termTyped"></span><span class="term-cursor"></span></div>
       </div>
       <p class="text-2xl md:text-4xl max-w-3xl font-bold leading-tight">
         Encuentro lo que le puede costar plata a tu plataforma antes de que se lo encuentre otro.
@@ -622,7 +632,7 @@
   <section id="contacto" class="p-6 md:p-12 md:py-32 bg-white flex flex-col items-center">
     <div class="max-w-xl w-full text-center mb-12">
       <h2 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4">Hablemos</h2>
-      <p class="mono text-sm uppercase font-bold tracking-widest text-gray-600">Respuesta INMEDIATA. Todo bajo NDA.</p>
+      <p class="mono text-sm uppercase font-bold tracking-widest text-gray-600">Te respondo a la brevedad. Todo bajo NDA.</p>
     </div>
 
     <!-- WhatsApp primary CTA -->
@@ -843,6 +853,33 @@
         if (formError) formError.classList.remove('hidden');
       });
     });
+  }
+
+  // ===== Terminal badge: typing loop =====
+  var termEl = document.getElementById('termTyped');
+  if (termEl) {
+    var frases = [
+      'mapeando superficie de ataque',
+      'leyendo flujos de negocio',
+      'verificando control de acceso',
+      'priorizando por impacto'
+    ];
+    var fi = 0, ci = 0, borrando = false;
+    function termPaso() {
+      var f = frases[fi];
+      if (!borrando) {
+        ci++;
+        termEl.textContent = f.slice(0, ci);
+        if (ci === f.length) { borrando = true; setTimeout(termPaso, 2200); return; }
+        setTimeout(termPaso, 45 + Math.random() * 70);
+      } else {
+        ci--;
+        termEl.textContent = f.slice(0, ci);
+        if (ci === 0) { borrando = false; fi = (fi + 1) % frases.length; setTimeout(termPaso, 400); return; }
+        setTimeout(termPaso, 22);
+      }
+    }
+    setTimeout(termPaso, 600);
   }
 
   // ===== Carousel dots indicator =====
